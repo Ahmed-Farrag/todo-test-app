@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useState } from "react";
+import ItemForm from "./Components/ItemForm";
+import ItemList from "./Components/ItemList";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  const onAddTask = (task) => {
+    if (task.name !== "") {
+      const id = tasks.length + 1;
+      const newTask = { id, ...task };
+      setTasks([...tasks, newTask]);
+    }
+  };
+
+  const onDeleteTask = (task) => {
+    setTasks(tasks.filter((t) => t.id !== task.id));
+  };
+  const onDoneTask = (task) => {
+    setTasks(
+      tasks.map((t) => (t.id === task.id ? { ...task, done: !task.done } : t))
+    );
+  };
+  const onEditTask = (task) => {
+    setTasks(tasks.map((t) => (t.id === task.id ? { ...task } : t)));
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ItemForm onAddTask={onAddTask} />
+      <ItemList
+        onDeleteTask={onDeleteTask}
+        tasks={tasks}
+        onEditTask={onEditTask}
+        onDoneTask={onDoneTask}
+      />
     </div>
   );
 }
