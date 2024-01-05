@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { ItemForm } from "../Components/ItemForm";
+import ItemForm from "../Components/ItemForm";
 import userEvent from "@testing-library/user-event";
 //  * test ceases
 // 1-form render correct
@@ -29,4 +29,22 @@ test("3-error msg should be displayed when input is empty", async () => {
   expect(error).toBeInTheDocument();
 });
 // 4-check if item added to list when user click on add button
+test("4-item should be added to list when user click on add button", async () => {
+  const mock = jest.fn();
+  render(<ItemForm onAddTask={mock} />);
+  const input = screen.getByTestId("task-name");
+  const button = screen.getByTestId("task-add-btn");
+  await userEvent.type(input, "ali");
+  await userEvent.click(button);
+  expect(mock).toHaveBeenCalled();
+});
 // 5-check if input is cleared after adding item
+test("5-input should be cleared after adding item", async () => {
+  const mock = jest.fn();
+  render(<ItemForm onAddTask={mock} />);
+  const input = screen.getByTestId("task-name");
+  const button = screen.getByTestId("task-add-btn");
+  await userEvent.type(input, "ali");
+  await userEvent.click(button);
+  expect(input).toHaveValue("");
+});
