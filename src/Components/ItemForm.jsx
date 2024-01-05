@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const ItemForm = ({ onAddTask }) => {
+const ItemForm = ({ onAddTask }) => {
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
 
@@ -41,3 +41,5 @@ export const ItemForm = ({ onAddTask }) => {
     </div>
   );
 };
+
+export default ItemForm;

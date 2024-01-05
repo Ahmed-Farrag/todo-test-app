@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const Item = ({ task, onDeleteTask, onDoneTask, onEditTask }) => {
+const Item = ({ task, onDeleteTask, onDoneTask, onEditTask }) => {
   const [done, setDone] = useState(task.done);
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(task.name);
@@ -67,3 +67,4 @@ export const Item = ({ task, onDeleteTask, onDoneTask, onEditTask }) => {
     </div>
   );
 };
+export default Item;
