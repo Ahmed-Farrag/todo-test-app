@@ -31,13 +31,17 @@ const Item = ({ task, onDeleteTask, onDoneTask, onEditTask }) => {
 
         {edit ? (
           <input
+            data-testid={"edit-input"}
             type="text"
             className="form-control "
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         ) : task.done ? (
-          <h4 className="me-3 pt-2 text-decoration-line-through">
+          <h4
+            data-testid={"task-name"}
+            className="me-3 pt-2 text-decoration-line-through"
+          >
             {task.name}
           </h4>
         ) : (
@@ -46,21 +50,34 @@ const Item = ({ task, onDeleteTask, onDoneTask, onEditTask }) => {
       </div>
       <div className="my-1 d-flex">
         <button
+          data-testid={"delete-btn"}
           className="btn btn-danger me-2"
           onClick={() => onDeleteTask(task)}
         >
           Delete
         </button>
         {done === false ? (
-          <button className="btn btn-success me-2" onClick={doneTask}>
+          <button
+            data-testid={"btnDone"}
+            className="btn btn-success me-2"
+            onClick={doneTask}
+          >
             Done
           </button>
         ) : (
-          <button className="btn btn-info me-2" onClick={doneTask}>
+          <button
+            data-testid={"btnUndo"}
+            className="btn btn-info me-2"
+            onClick={doneTask}
+          >
             Undo
           </button>
         )}
-        <button className="btn btn-secondary me-2" onClick={editTask}>
+        <button
+          data-testid={"editbtn"}
+          className="btn btn-secondary me-2"
+          onClick={editTask}
+        >
           Edit
         </button>
       </div>
